@@ -21,15 +21,21 @@ def depositar (valor):
 
 def sacar (valor_saque):
     global saldo, numero_de_saques, extrato, LIMITE_SAQUES
-    if saldo >= valor_saque or valor_saque <= limite and numero_de_saques < LIMITE_SAQUES:
+    if saldo >= valor_saque <= limite and numero_de_saques < LIMITE_SAQUES:
         saldo -= valor_saque
         extrato.append(f'Saque de R$ {valor_saque:.2f}')
         print(f'Saldo atual: R$ {saldo:.2f}')
         print(f'Saque de R$ {valor_saque:.2f} realizado com sucesso!')
         numero_de_saques += 1
     
+    elif numero_de_saques >= LIMITE_SAQUES:
+        print('Número máximo de saques atingido!')
+
+    elif valor_saque > saldo:
+        print('Saldo insuficiente!')
+    
     else:
-        print("Limite de saque insuficiente!")
+        print('Valor inválido para saque!')
 
 def ver_extrato ():
     if extrato == []:
